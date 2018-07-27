@@ -45,34 +45,36 @@ public class MaryJaneandInvitations {
         }
     }
 
-    private static String OrderType(int numline, String type) {
+    private static String OrderType(int numline,String type) {
         String order = "";
         int countX = 0;
         int firstX = 0;
-        int lastX = 0;
+        int lastX;
         char[] Type =type.toCharArray();
-        for(int i = 0; i< type.length(); i++){
-            if(Type[i] == 'X'){
-                countX ++;
-                if(Type[i-1] != 'X'){
-                    firstX = i;
-                }
-                if(Type[i+1]!= 'X'){
-                    lastX = i;
-                    for(int j = firstX; j<=lastX; j++){
-                        Type[j] = 0;
+        do{
+            for(int i = 0; i< type.length(); i++){
+                if(Type[i] == 'X'){
+                    countX ++;
+                    if(Type[i-1] != 'X'){
+                        firstX = i;
                     }
-                    Type[firstX-countX] = Type[lastX +1];
-                    Type[lastX+1] = 0;
-                    countX = 0;
+                    if(Type[i+1]!= 'X'){
+                        lastX = i;
+                        for(int j = firstX; j<=lastX; j++){
+                            Type[j] = 0;
+                        }
+                        Type[firstX-countX] = Type[lastX +1];
+                        Type[lastX+1] = 0;
+                        break;
+                    }
                 }
             }
-        }
-        for(int i =0; i< type.length(); i++){
-            if (Character.isAlphabetic(Type[i])) {
-                order = order+Type[i];
+            for(int i =0; i< type.length(); i++){
+                if (Character.isAlphabetic(Type[i])) {
+                    order = order+Type[i];
+                }
             }
-        }
+        }while(numline != order.length());      
         return order;
     }
 }
