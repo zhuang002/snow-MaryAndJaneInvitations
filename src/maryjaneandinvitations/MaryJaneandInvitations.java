@@ -64,6 +64,7 @@ public class MaryJaneandInvitations {
                     }
                     Type[firstX-countX] = Type[lastX +1];
                     Type[lastX+1] = 0;
+                    countX = 0;
                 }
             }
         }
