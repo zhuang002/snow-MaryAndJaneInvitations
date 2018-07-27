@@ -21,6 +21,7 @@ public class MaryJaneandInvitations {
         Scanner reader = new Scanner(System.in);
 	int numline = reader.nextInt();
         String type = reader.next();
+        
         String namelist[] = new String [numline];
         for(int i = 0; i<numline; i++){
             String name = reader.next();
@@ -45,36 +46,37 @@ public class MaryJaneandInvitations {
         }
     }
 
-    private static String OrderType(int numline,String type) {
+    public static String OrderType(int numline,String type) {
         String order = "";
         int countX = 0;
         int firstX = 0;
         int lastX;
         char[] Type =type.toCharArray();
-        do{
-            for(int i = 0; i< type.length(); i++){
-                if(Type[i] == 'X'){
-                    countX ++;
-                    if(Type[i-1] != 'X'){
-                        firstX = i;
+
+        for(int i = 0; i< type.length(); i++){
+            if(Type[i] == 'X'){
+                countX ++;
+                if(Type[i-1] != 'X'){
+                    firstX = i;
+                }
+                if(Type[i+1]!= 'X'){
+                    lastX = i;
+                    for(int j = firstX; j<=lastX; j++){
+                        Type[j] = 0;
                     }
-                    if(Type[i+1]!= 'X'){
-                        lastX = i;
-                        for(int j = firstX; j<=lastX; j++){
-                            Type[j] = 0;
-                        }
-                        Type[firstX-countX] = Type[lastX +1];
-                        Type[lastX+1] = 0;
-                        break;
-                    }
+                    Type[firstX-countX] = Type[lastX +1];
+                    Type[lastX+1] = 0;
+                    i+=2;
+                    countX=0;
                 }
             }
-            for(int i =0; i< type.length(); i++){
-                if (Character.isAlphabetic(Type[i])) {
-                    order = order+Type[i];
-                }
+        }
+        for(int i =0; i< type.length(); i++){
+            if (Character.isAlphabetic(Type[i])) {
+                order = order+Type[i];
             }
-        }while(numline != order.length());      
+        }
+        
         return order;
     }
 }
